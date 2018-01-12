@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
-import './index.less';
-export default  class Navs extends Component {
+import "./index.less";
+export default class Navs extends Component {
   render() {
     return (
       <div className="Navs">
         <ul>
           <li>
-            <Link to="/">首页</Link>
+            <Link activeClassName="active" to="/">好友动态</Link>
           </li>
           <li>
-            <Link to="/Mine">我的页面</Link>
+            <Link activeClassName="active" to="/Mine">我的动态</Link>
           </li>
         </ul>
       </div>

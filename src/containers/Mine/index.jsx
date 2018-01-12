@@ -15,7 +15,7 @@ export default class Main extends Component {
   }
   getData = () => {
     let self = this;
-    axios.get("/User/Get").then(res => {
+    axios.get("/MyItem/Get").then(res => {
       console.log(res);
       if (res.status == 200 && res.data.message == "success") {
         self.setState({
@@ -30,16 +30,18 @@ export default class Main extends Component {
     return (
       <div>
         <Navs />
-        {user.map(item => {
-          return (
-            <li className="item_my">
-              {`${item.id}.
-              ${item.name}`}
-              我的页面
-            </li>
-          );
-        })}
-        
+        <div className="mine_modul">
+          {user.length ? (
+            <div className="mine_icon animated lightSpeedIn">
+              <img src={user[0].img} className="icon" alt="" />
+              <div className="text"> {user[0].text}</div>
+            </div>
+          ) : (
+            ""
+          )}
+
+          <Item url="/MyItem/Get" type="Mine" Animate="lightSpeedIn" />
+        </div>
       </div>
     );
   }

@@ -70,21 +70,33 @@ export default class Inner extends Component {
           : this.props.open("收藏");
     }
   };
-  call=()=>{
-      alert('110')
-  }
+  call = () => {
+    alert("110");
+  };
   render() {
-    let { item } = this.props;
+    let { item, type } = this.props;
     let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state;
     return (
-      <Col md={12} xs={12} sm={12} key={item.id} className="item_modul">
+      <Col md={12} xs={12} sm={12} key={item.id} className="item_modul_inner">
         <div className="title">
           <div>
             <Col md={2} xs={2} sm={2} className="icon_modul">
               <img src={item.img} alt="" />
             </Col>
             <Col md={10} xs={10} sm={10}>
-              <div className="itme_name"> {item.name}<Button style={{float:'right'}} onClick={this.call}>举报</Button></div>
+              <div className="itme_name">
+                {" "}
+                {item.name}
+                {type == "Mine" ? (
+                  <Button style={{ float: "right" }} onClick={this.call}>
+                    删除
+                  </Button>
+                ) : (
+                  <Button style={{ float: "right" }} onClick={this.call}>
+                    举报
+                  </Button>
+                )}
+              </div>
               <div className="item_date">2017年12月12号</div>
             </Col>
           </div>

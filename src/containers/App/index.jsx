@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div>
         <Navs />
-        <Item />
+        <Item url="/Item/Get" type="Index" Animate="bounceInLeft"/>
       </div>
     );
   }

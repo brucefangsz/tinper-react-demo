@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Con, Row, Col, Icon, Modal, Button } from "tinper-bee";
 import axios from "axios";
-import Inner from './Inner';
-import { AnimateArray } from "./data";
+import Inner from "./Inner";
 import classnames from "classnames";
 import "./index.less";
 import "assets/css/animate.min.css";
@@ -23,8 +22,9 @@ export default class Item extends Component {
     this.getData();
   }
   getData = () => {
-    let self = this;
-    axios.get("/Item/Get").then(res => {
+    let self = this,
+      url = self.props.url;
+    axios.get(url).then(res => {
       self.setState({
         data: res.data.data
       });
@@ -61,9 +61,11 @@ export default class Item extends Component {
     });
   };
   render() {
-    let { data } = this.state;
+    let { data } = this.state,
+      type = this.props.type,
+      Animate = this.props.Animate;
     return (
-      <Row className="item_modul">
+      <Row className={`item_modul animated ${Animate}`}>
         {this.state.isLikeShow ? (
           <div className={`tips_modul animated ${this.state.likeAT}`}>
             {this.state.likeHTML}
@@ -90,7 +92,12 @@ export default class Item extends Component {
         </Modal>
         {data.map(item => {
           return (
-            <Inner item={item} open={this.open} likeThis={this.likeThis} />
+            <Inner
+              item={item}
+              open={this.open}
+              likeThis={this.likeThis}
+              type={type}
+            />
           );
         })}
       </Row>

@@ -71,6 +71,66 @@ npm run dev
 
 首先看到的是看到mock文件夹，mock文件夹功能是 模拟本地数据请求，存放请求的数据。
 
+
+
+
+
+```
+├── LICENSE
+├── README.md
+├── mock
+│   └── api
+│       └── user
+│           ├── get.json
+│           ├── item.json
+│           ├── myitem.json
+│           ├── post.json
+│           └── put.json
+├── package.json
+├── postcss.config.js
+├── src
+│   ├── assets
+│   │   ├── css
+│   │   │   └── animate.min.css
+│   │   └── images
+│   │       ├── favicon.png
+│   │       └── logo.png
+│   ├── components
+│   │   ├── MyComponent
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── MyItem
+│   │   │   ├── Inner.jsx
+│   │   │   ├── data.js
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── Welcome
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   └── index.js
+│   ├── containers
+│   │   ├── App
+│   │   │   └── index.jsx
+│   │   ├── Mine
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── Nav
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   └── index.js
+│   ├── index.html
+│   ├── index.js
+│   ├── index.less
+│   ├── route.jsx
+│   └── static
+│       └── js
+│           └── demo.js
+├── uba.config.js
+└── uba.mock.js
+```
+
+
+
 mock 文件夹：
 
 + api文件夹

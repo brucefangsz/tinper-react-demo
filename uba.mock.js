@@ -1,19 +1,18 @@
 module.exports = {
-  GET: [
-    {
+  "get": [{
       "/User/Get": "./mock/api/user/get.json"
     },
-    { "/Item/Get": "./mock/api/user/item.json" },
-    { "/MyItem/Get": "./mock/api/user/myitem.json" }
-  ],
-  POST: [
     {
-      "/User/Post": "./mock/api/user/post.json"
+      "/Item/Get": "./mock/api/user/item.json"
+    },
+    {
+      "/MyItem/Get": "./mock/api/user/myitem.json"
     }
   ],
-  PUT: [
-    {
-      "/User/Put": "./mock/api/user/put.json"
-    }
-  ]
-};
+  "post": [{
+    "/User/Post": "./mock/api/user/post.json"
+  }],
+  "put": [{
+    "/User/Put": "./mock/api/user/put.json"
+  }]
+}

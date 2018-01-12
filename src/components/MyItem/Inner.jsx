@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Con, Row, Col, Icon, Modal, Button } from "tinper-bee";
 import classnames from "classnames";
 import { AnimateArray } from "./data";
+import { OutAnimateArray } from "./data";
 export default class Inner extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +19,10 @@ export default class Inner extends Component {
   componentWillReceiveProps(props) {}
   userSet = (type, e) => {
     let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state,
-      Anum = Math.ceil(Math.random() * 76),
-      Atype = AnimateArray[Anum];
-    console.log(Anum, Atype);
+      Anum = Math.ceil(Math.random() * 44),
+      OAnum = Math.ceil(Math.random() * 31),
+      Atype = AnimateArray[Anum],
+      OAtype = OutAnimateArray[OAnum];
     switch (type) {
       case "good":
         !isGood
@@ -39,7 +41,7 @@ export default class Inner extends Component {
                 isGood: false
               },
               () => {
-                this.props.likeThis(Atype, "👍");
+                this.props.likeThis(OAtype, "👍");
               }
             );
         break;

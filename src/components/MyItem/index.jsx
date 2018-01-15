@@ -6,6 +6,7 @@ import { AnimateArray } from "./data";
 import classnames from "classnames";
 import "./index.less";
 import "assets/css/animate.min.css";
+import { setTimeout } from "timers";
 
 export default class Item extends Component {
   constructor() {
@@ -16,8 +17,7 @@ export default class Item extends Component {
       type: "",
       isLikeShow: false,
       likeAT: "",
-      likeHTML: "",
-      delStyle: ""
+      likeHTML: ""
     };
   }
   componentDidMount() {
@@ -25,7 +25,7 @@ export default class Item extends Component {
   }
   getData = () => {
     let self = this,
-      url = this.props.url;
+      url = self.props.url;
     axios.get(url).then(res => {
       self.setState({
         data: res.data.data
@@ -51,7 +51,6 @@ export default class Item extends Component {
     );
   };
   open = str => {
-    console.log(str);
     this.setState({
       showModal: true,
       type: str
@@ -63,13 +62,19 @@ export default class Item extends Component {
     });
   };
   del = index => {
-    let data = this.state.data;
+    let newData = this.state.data,
+      self = this;
+    // if (newData.length <= 1) {
+    //   alert('留一条吧')
+    // } else {
+    newData.splice(index, 1);
     this.setState({
-      data: data.splice(index + 1, 1)
+      data: newData
     });
+    // }
   };
   render() {
-    let { data, delStyle } = this.state,
+    let { data } = this.state,
       { Animate, type } = this.props;
 
     return (
@@ -98,20 +103,26 @@ export default class Item extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        {data.map((item, index) => {
-          console.log(index);
-          return (
-            <Inner
-              item={item}
-              open={this.open}
-              likeThis={this.likeThis}
-              type={type}
-              del={this.del}
-              index={index}
-              delStyle={delStyle}
-            />
-          );
-        })}
+
+        {data.length ? (
+          data.map((item, index) => {
+            return (
+              <Inner
+                item={item}
+                open={this.open}
+                likeThis={this.likeThis}
+                type={type}
+                del={this.del}
+                index={index}
+              />
+            );
+          })
+        ) : (
+          <div className="defaultItem">
+            <img src="http://p3.pstatp.com/thumb/3a1e001b168600a17ea7" alt="" />
+            <div>空空如也</div>
+          </div>
+        )}
       </Row>
     );
   }

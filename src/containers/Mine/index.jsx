@@ -16,7 +16,6 @@ export default class Main extends Component {
   getData = () => {
     let self = this;
     axios.get("/MyItem/Get").then(res => {
-      console.log(res);
       if (res.status == 200 && res.data.message == "success") {
         self.setState({
           user: res.data.data
@@ -27,7 +26,6 @@ export default class Main extends Component {
 
   render() {
     let { user } = this.state;
-    console.log(user);
     return (
       <div>
         <Navs />

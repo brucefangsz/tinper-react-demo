@@ -69,40 +69,58 @@ npm run dev
 
 ![file](/Users/brucefang/Downloads/tinper-react框架/Introduction-介绍/img/file.png)
 
-首先看到的是看到mock文件夹，mock文件夹功能是 模拟本地数据请求，存放请求的数据。
+文件夹以及文件介绍：
 
-mock 文件夹：
-
-+ api文件夹
-  + 内有user文件夹
-    + get.json存放本地模拟数据；
-
-node_modules ：
-
-+ 文件存放项目所需的文件包；
-
-src文件夹：
-
-* assets文件
-  * images 图片文件
-* components 存放项目公用组件
-  + Welcompen 文件夹单个公用组件
-    + index.jsx 组件文件
-    + index.less 公用组件样式
-* containers 存放页面文件
-  + App 文件存放页面文件
-    + index.jsx 为页面逻辑代码
-* static  存放静态文件
-* index.html 存放主文件的 html容器代码
-* index.js存放index的逻辑代码
-* index.less 存放主要 公用的样式文件
-* router.jsx 存放项目路由
-
-其他文件：
-
-* .babelrc 这个文件是用来设置转码的规则和插件;
-* .gitignore 设置 git忽略提交文件或者文件类型。
-* package.json 存放项目所用包和script命令
-* uba.config.js 存放uba配置命令
-* uba.mock.js 存放uba 本地模拟数据配置
-
+```
+├── LICENSE
+├── README.md
+├── mock 				本地数据模拟文件夹
+│   └── api				
+│       └── user
+│           ├── get.json 存放本地模拟数据
+│           ├── item.json
+│           ├── myitem.json
+│           ├── post.json
+│           └── put.json
+├── package.json
+├── postcss.config.js
+├── src
+│   ├── assets 			图片字体等文件夹
+│   │   ├── css
+│   │   │   └── animate.min.css 动画库
+│   │   └── images   			图片文件夹
+│   │       ├── favicon.png   	图片文件
+│   │       └── logo.png
+│   ├── components				自定义组件文件夹
+│   │   ├── MyComponent			自定义组件
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── MyItem
+│   │   │   ├── Inner.jsx
+│   │   │   ├── data.js
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── Welcome
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   └── index.js
+│   ├── containers
+│   │   ├── App					页面
+│   │   │   └── index.jsx
+│   │   ├── Mine
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   ├── Nav
+│   │   │   ├── index.jsx
+│   │   │   └── index.less
+│   │   └── index.js
+│   ├── index.html
+│   ├── index.js				总入口
+│   ├── index.less				页面样式
+│   ├── route.jsx				路由配置
+│   └── static
+│       └── js
+│           └── demo.js
+├── uba.config.js				项目配置文件
+└── uba.mock.js					本地数据模拟配置文件
+```

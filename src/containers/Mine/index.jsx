@@ -24,6 +24,7 @@ export default class Main extends Component {
       }
     });
   };
+
   render() {
     let { user } = this.state;
     console.log(user);
@@ -40,7 +41,11 @@ export default class Main extends Component {
             ""
           )}
 
-          <Item url="/MyItem/Get" type="Mine" Animate="lightSpeedIn" />
+          <Item
+            url="/MyItem/Get"
+            type="Mine"
+            Animate="lightSpeedIn"
+          />
         </div>
       </div>
     );

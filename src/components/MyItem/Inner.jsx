@@ -13,10 +13,15 @@ export default class Inner extends Component {
       isLike: a.isLike,
       isGoodNum: a.isGoodNum,
       isBadNum: a.isBadNum,
-      isLikeNum: a.isLikeNum
+      isLikeNum: a.isLikeNum,
+      delStyle: ""
     };
   }
-  componentWillReceiveProps(props) {}
+  componentWillReceiveProps(props) {
+    this.setState({
+      delStyle: props.delStyle
+    });
+  }
   userSet = (type, e) => {
     let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state,
       Anum = Math.ceil(Math.random() * 44),
@@ -75,11 +80,28 @@ export default class Inner extends Component {
   call = () => {
     alert("110");
   };
+  del = (index, e) => {
+    this.props.del(index);
+  };
   render() {
-    let { item, type } = this.props;
-    let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state;
+    let { item, type, index } = this.props;
+    let {
+      isGood,
+      isBad,
+      isLike,
+      isGoodNum,
+      isBadNum,
+      isLikeNum,
+      delStyle
+    } = this.state;
     return (
-      <Col md={12} xs={12} sm={12} key={item.id} className="item_modul_inner">
+      <Col
+        md={12}
+        xs={12}
+        sm={12}
+        key={item.id}
+        className={`item_modul_inner animated ${delStyle}`}
+      >
         <div className="title">
           <div>
             <Col md={2} xs={2} sm={2} className="icon_modul">
@@ -90,7 +112,10 @@ export default class Inner extends Component {
                 {" "}
                 {item.name}
                 {type == "Mine" ? (
-                  <Button style={{ float: "right" }} onClick={this.call}>
+                  <Button
+                    style={{ float: "right" }}
+                    onClick={this.del.bind(this, index)}
+                  >
                     删除
                   </Button>
                 ) : (

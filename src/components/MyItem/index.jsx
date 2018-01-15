@@ -16,7 +16,8 @@ export default class Item extends Component {
       type: "",
       isLikeShow: false,
       likeAT: "",
-      likeHTML: ""
+      likeHTML: "",
+      delStyle: ""
     };
   }
   componentDidMount() {
@@ -61,10 +62,16 @@ export default class Item extends Component {
       showModal: false
     });
   };
+  del = index => {
+    let data = this.state.data;
+    this.setState({
+      data: data.splice(index + 1, 1)
+    });
+  };
   render() {
-    let { data } = this.state,
-      Animate = this.props.Animate,
-      type = this.props.type;
+    let { data, delStyle } = this.state,
+      { Animate, type } = this.props;
+
     return (
       <Row className={`item_modul animated ${Animate}`}>
         {this.state.isLikeShow ? (
@@ -91,9 +98,18 @@ export default class Item extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        {data.map(item => {
+        {data.map((item, index) => {
+          console.log(index);
           return (
-            <Inner item={item} open={this.open} likeThis={this.likeThis} type={type} />
+            <Inner
+              item={item}
+              open={this.open}
+              likeThis={this.likeThis}
+              type={type}
+              del={this.del}
+              index={index}
+              delStyle={delStyle}
+            />
           );
         })}
       </Row>

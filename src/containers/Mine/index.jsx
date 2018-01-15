@@ -29,9 +29,9 @@ export default class Main extends Component {
     return (
       <div>
         <Navs />
-        <div className="mine_modul">
+        <div className="mine_modul animated lightSpeedIn">
           {user.length ? (
-            <div className="mine_icon animated lightSpeedIn">
+            <div className="mine_icon">
               <img src={user[0].img} className="icon" alt="" />
               <div className="text"> {user[0].text}</div>
             </div>
@@ -42,7 +42,7 @@ export default class Main extends Component {
           <Item
             url="/MyItem/Get"
             type="Mine"
-            Animate="lightSpeedIn"
+            Animate=""
           />
         </div>
       </div>

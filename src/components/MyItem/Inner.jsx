@@ -13,11 +13,10 @@ export default class Inner extends Component {
       isLike: a.isLike,
       isGoodNum: a.isGoodNum,
       isBadNum: a.isBadNum,
-      isLikeNum: a.isLikeNum,
+      isLikeNum: a.isLikeNum
     };
   }
-  componentWillReceiveProps(props) {
-  }
+  componentWillReceiveProps(props) {}
   userSet = (type, e) => {
     let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state,
       Anum = Math.ceil(Math.random() * 44),
@@ -80,8 +79,8 @@ export default class Inner extends Component {
     this.props.del(index);
   };
   render() {
-    let { item, type, index } = this.props;
-    let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state;
+    let { item, type, index } = this.props,
+      { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state;
     return (
       <Col md={12} xs={12} sm={12} key={item.id} className={`item_modul_inner`}>
         <div className="title">

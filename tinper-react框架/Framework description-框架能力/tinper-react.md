@@ -131,3 +131,315 @@ export default class Navs extends Component {
 
 第三步：Item 自定义组件解析：
 
+首先讲解 Item文件夹内 index.jsx
+
+```
+...引入文件所需文件
+export default class Item extends Component {
+  constructor() {
+    super();
+    this.state = {
+    //定义组件内状态存储值。
+      data: [],
+      showModal: false,
+      type: "",
+      isLikeShow: false,
+      likeAT: "",
+      likeHTML: ""
+    };
+  }
+  //生命周期 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。 如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)
+  componentDidMount() {
+    this.getData();
+  }
+  //定义获取数据方法
+  getData = () => {
+  	//定义this；
+    let self = this,
+    //获取 props 传来的值url；
+      url = self.props.url;
+     //通过axios.get方法 获取数据
+    axios.get(url).then(res => {
+      self.setState({
+        data: res.data.data
+      });
+    });
+  };
+  //点击操作
+  likeThis = (classN, IH) => {
+    let self = this;
+    this.setState(
+      {
+        isLikeShow: true,
+        likeAT: classN,
+        likeHTML: IH
+      },
+      () => {
+        setTimeout(() => {
+          self.setState({
+            isLikeShow: false,
+            likeAT: ""
+          });
+        }, 1000);
+      }
+    );
+  };
+  //模态框方法展示
+  open = str => {
+    this.setState({
+      showModal: true,
+      type: str
+    });
+  };
+  //关闭模态框
+  close = () => {
+    this.setState({
+      showModal: false
+    });
+  };
+  //删除文件
+  del = index => {
+    let newData = this.state.data,
+      self = this;
+    newData.splice(index, 1);
+    this.setState({
+      data: newData
+    });
+  };
+  render() {
+    let { data } = this.state,
+      { Animate, type } = this.props;
+    return (
+      <Row className={`item_modul animated ${Animate}`}>
+        {this.state.isLikeShow ? (
+          <div className={`tips_modul animated ${this.state.likeAT}`}>
+            {this.state.likeHTML}
+          </div>
+        ) : ("")}
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header>
+            <Modal.Title>少侠住手，你已经点过了？</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>没看已经点过{this.state.type}了吗？</Modal.Body>
+          <Modal.Footer>
+            <Button
+              onClick={this.close}
+              shape="border"
+              style={{ marginRight: 50 }}
+            >
+              关闭
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        //如果有数据则那么渲染数据否则渲染空数据提示
+        {data.length ? (
+          data.map((item, index) => {
+            return (
+              <Inner
+                item={item}
+                open={this.open}
+                likeThis={this.likeThis}
+                type={type}
+                del={this.del}
+                index={index}
+              />
+            );
+          })
+        ) : (
+          <div className="defaultItem">
+            <img src="http://p3.pstatp.com/thumb/3a1e001b168600a17ea7" alt="" />
+            <div>空空如也</div>
+          </div>
+        )}
+      </Row>
+    );
+  }
+}
+
+```
+
+> 第四步 ：通过上面我们看到 该组件内部引用了 Inner 组件。我们开始讲解Inner'组件的写法，这种是在组件内部再次引用组件。出现了多次调用。
+
+```
+import React, { Component } from "react";
+//引入tinper-bee组件库内的组件如栅格布局 Con，Row，Col，和图标Icon，模态框Modal，按钮Button；
+import { Con, Row, Col, Icon, Modal, Button } from "tinper-bee";
+//框架集成了classnames样式管理库，可以直接引入使用。因便于className的判断逻辑处理。
+import classnames from "classnames";
+//此处引入动态效果库。
+import { AnimateArray } from "./data";
+import { OutAnimateArray } from "./data";
+export default class Inner extends Component {
+  constructor(props) {
+    super(props);
+    //根据props 传值来给this.state赋值；
+    let a = this.props.item;
+    this.state = {
+      isGood: a.isGood,
+      isBad: a.isBad,
+      isLike: a.isLike,
+      isGoodNum: a.isGoodNum,
+      isBadNum: a.isBadNum,
+      isLikeNum: a.isLikeNum,
+    };
+  }
+ //组件生命周期之 componentWillReceiveProps 组件props改变执行该方法；
+  componentWillReceiveProps(props) {
+  }
+  //定义 点击事件来判断点击具体是那个元素，来判断如何显示。和逻辑。
+  userSet = (type, e) => {
+    let { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state,
+      Anum = Math.ceil(Math.random() * 44),
+      OAnum = Math.ceil(Math.random() * 31),
+      Atype = AnimateArray[Anum],
+      OAtype = OutAnimateArray[OAnum];
+    switch (type) {
+      case "good":
+        !isGood
+          ? this.setState(
+              {
+                isGoodNum: (isGoodNum += 1),
+                isGood: true
+              },
+              () => {
+                this.props.likeThis(Atype, "💗");
+              }
+            )
+          : this.setState(
+              {
+                isGoodNum: (isGoodNum -= 1),
+                isGood: false
+              },
+              () => {
+                this.props.likeThis(OAtype, "👍");
+              }
+            );
+        break;
+        ...
+  };
+  call = () => {
+    alert("110");
+  };
+  //点击删除的时候调用父组件的删除方法；
+  del = (index, e) => {
+    this.props.del(index);
+  };
+  render() {
+  //采用ES6解构的方法获取组件的state值和props值。方便下面使用；
+    let { item, type, index } = this.props,
+    { isGood, isBad, isLike, isGoodNum, isBadNum, isLikeNum } = this.state;
+    return (
+      <Col md={12} xs={12} sm={12} key={item.id} className={`item_modul_inner`}>
+        <div className="title">
+          <div>
+            <Col md={2} xs={2} sm={2} className="icon_modul">
+              <img src={item.img} alt="" />
+            </Col>
+            <Col md={10} xs={10} sm={10}>
+              <div className="itme_name">
+                {" "}
+                {item.name}
+                {type == "Mine" ? (
+                  <Button
+                    style={{ float: "right" }}
+                    onClick={this.del.bind(this, index)}
+                  >
+                    删除{item.id}
+                  </Button>
+                ) : (
+                  <Button style={{ float: "right" }} onClick={this.call}>
+                    举报
+                  </Button>
+                )}
+              </div>
+              <div className="item_date">2017年12月12号</div>
+            </Col>
+          </div>
+          <Col md={12} xs={12} sm={12} className="item_con">
+            {item.content}
+          </Col>
+          <Col md={12} xs={12} sm={12} className="edit_modul">
+            <Icon
+              type={classnames("heart-shape-outline ", {
+                "uf-heart": isGood,
+                "uf-heart-o": !isGood
+              })}
+              onClick={this.userSet.bind(this, "good")}
+            >
+              <span>{isGoodNum}</span>
+            </Icon>
+            <Icon
+              type="gift-box uf-gift"
+              onClick={this.userSet.bind(this, "bad")}
+            >
+              <span>{isBadNum}</span>
+            </Icon>
+
+            <Icon
+              type={classnames("star-1", {
+                "uf-star-o": !isLike,
+                "uf-star": isLike
+              })}
+              onClick={this.userSet.bind(this, "like")}
+            >
+              <span>{isLikeNum}</span>
+            </Icon>
+          </Col>
+        </div>
+      </Col>
+    );
+  }
+}
+
+```
+
+> 第五步： 页面渲染以及逻辑处理完成了。下面看一下静态路由管理。
+
+```
+import { Router, Route, hashHistory } from "react-router";
+//引入路由对应的渲染模块。
+import { App, Mine, MyTest } from "containers";
+
+export default (
+  <Router history={hashHistory}>
+    <Route path="/" component={App} />
+    <Route path="/Mine" component={Mine} />
+    <Route path="/Test" component={MyTest} />
+  </Router>
+);
+
+```
+
+路由管理引入Router，Route和hashHistory 通过react-router;
+
+引入路由对应的渲染模块。
+
+> 发送请求
+
+在MyItem组件中我们用到了，axios 下面我们具体说一下axios的使用方法和本地模拟数据mock；
+
+```
+ componentDidMount() {
+    this.getData();
+  }
+  getData = () => {
+    let self = this,
+      url = self.props.url;
+    axios.get(url).then(res => {
+      self.setState({
+        data: res.data.data
+      });
+    });
+  };
+```
+
+通过例子可以看出我们 在组件渲染完后执行了获取数据方法，获取数据方法执行的axios。get方法获取地址是组件props传值 self.props.url;
+
+通过例子我们看出self.props.url是App文件夹内的index.jsx
+
+```
+<Item url="/Item/Get" type="Index" Animate="zoomIn" /> 
+url ="/Item/Get" 为父组件给子组件传值url
+type和Animate 亦然；
+```
+

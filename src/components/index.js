@@ -1,4 +1,4 @@
-import Welcome from "./Welcome/index.jsx";
 import Item from "./MyItem/index.jsx";
+import Navs from "./Nav/index.jsx";
 
-export { Welcome, Item };
+export {  Item, Navs };

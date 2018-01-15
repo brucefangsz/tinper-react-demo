@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navs } from "containers";
+import { Navs } from "components";
 import axios from "axios";
 import { Item } from "components";
 import "./index.less";
@@ -29,7 +29,7 @@ export default class Main extends Component {
     return (
       <div>
         <Navs />
-        <div className="mine_modul animated lightSpeedIn">
+        <div className="mine_modul animated bounceInRight">
           {user.length ? (
             <div className="mine_icon">
               <img src={user[0].img} className="icon" alt="" />
@@ -38,7 +38,6 @@ export default class Main extends Component {
           ) : (
             ""
           )}
-
           <Item
             url="/MyItem/Get"
             type="Mine"

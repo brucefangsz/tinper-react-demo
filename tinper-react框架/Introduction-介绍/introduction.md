@@ -59,17 +59,12 @@ Downloading template-react-single-pages please wait.
 
 ```
 npm run dev
+浏览器会自动打开项目，接下来开始调试创建组件
 ```
-
-![builds](/Users/brucefang/Downloads/tinper-react框架/Introduction/img/builds.png)
 
 我们看到项目已经启动并且在浏览器自动打开。
 
-4、文件夹 详解：
-
-![file](/Users/brucefang/Downloads/tinper-react框架/Introduction-介绍/img/file.png)
-
-文件夹以及文件介绍：
+4、文件夹以及文件介绍：
 
 ```
 ├── LICENSE
@@ -105,7 +100,7 @@ npm run dev
 │   │   │   └── index.less
 │   │   └── index.js
 │   ├── containers
-│   │   ├── App					页面
+│   │   ├── App					页面文件
 │   │   │   └── index.jsx
 │   │   ├── Mine
 │   │   │   ├── index.jsx

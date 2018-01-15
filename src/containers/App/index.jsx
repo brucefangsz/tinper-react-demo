@@ -1,6 +1,5 @@
 import { Component } from "react";
-import { Navbar, FormControl, Menu, Badge, Icon, Breadcrumb } from "tinper-bee";
-import { Navs } from "containers";
+import { Navs } from "components";
 import { Item } from "components";
 export default class App extends Component {
   constructor() {
@@ -10,7 +9,7 @@ export default class App extends Component {
     return (
       <div>
         <Navs />
-        <Item url="/Item/Get" type="Index" Animate="bounceInLeft"/>
+        <Item url="/Item/Get" type="Index" Animate="zoomIn" />
       </div>
     );
   }

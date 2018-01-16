@@ -93,10 +93,10 @@ export default class App extends Component {
 第二步：Navs 组件讲解
 
 ```
-│   ├── components
-│   │   ├── Nav //定义Tal导航公用组件
-│   │   │   ├── index.jsx //组件文件
-│   │   │   └── index.less // 组件样式文件
+├── components
+│   ├── Nav //定义Tal导航公用组件
+│   │   ├── index.jsx //组件文件
+│   │   └── index.less // 组件样式文件
 通过上面的 路径 我们看到 自定义组件都存放在 components 内；Nav
 import React, { Component } from "react";
 //引入Link组件来自react-router；
@@ -337,20 +337,16 @@ export default class Inner extends Component {
             </Col>
             <Col md={10} xs={10} sm={10}>
               <div className="itme_name">
-                {" "}
                 {item.name}
                 {type == "Mine" ? (
                   <Button
                     style={{ float: "right" }}
-                    onClick={this.del.bind(this, index)}
-                  >
+                    onClick={this.del.bind(this, index)}>
                     删除{item.id}
                   </Button>
-                ) : (
-                  <Button style={{ float: "right" }} onClick={this.call}>
+                ) : (<Button style={{ float: "right" }} onClick={this.call}>
                     举报
-                  </Button>
-                )}
+                  </Button>)}
               </div>
               <div className="item_date">2017年12月12号</div>
             </Col>
@@ -453,17 +449,24 @@ tinper-uba 不仅有生成项目 打包项目等功能，uba 还具有 uba-mock�
 
 ```
 module.exports = {
-  "GET": [{
-    "/User/Get": "./mock/api/user/get.json"
-  }],
-  "POST": [{
-    "/User/Post": "./mock/api/user/post.json"
-  }],
-  "PUT": [{
-    "/User/Put": "./mock/api/user/put.json"
-  }]
-}
-
+  GET: [
+    {
+      "/User/Get": "./mock/api/user/get.json"
+    },
+    { "/Item/Get": "./mock/api/user/item.json" },
+    { "/MyItem/Get": "./mock/api/user/myitem.json" }
+  ],
+  POST: [
+    {
+      "/User/Post": "./mock/api/user/post.json"
+    }
+  ],
+  PUT: [
+    {
+      "/User/Put": "./mock/api/user/put.json"
+    }
+  ]
+};
 ```
 
 项目初始化暂定了三种请求方式来模拟后台数据接口。

@@ -26,7 +26,7 @@ tinper-react是基于react库及周边技术搭建的整体复杂应用解决方
 
 ![auto](/Users/brucefang/Downloads/tinper-react框架/Summary-概述/img/auto.svg)自动化编译完自动浏览器预览
 
-![huanjing](/Users/brucefang/Downloads/tinper-react框架/Summary-概述/img/huanjing.svg)环境选择区分开发环境和生产环境
+![huanjing](/Users/brucefang/Downloads/tinper-react框架/Summary-概述/img/huanjing.svg )环境选择区分开发环境和生产环境
 
 ![update](/Users/brucefang/Downloads/tinper-react框架/Summary-概述/img/update.svg)支持热更新，随时修改保存随时浏览器查看效果
 

@@ -5,7 +5,6 @@ import Inner from "./Inner";
 import { AnimateArray } from "./data";
 import classnames from "classnames";
 import "./index.less";
-import "assets/css/animate.min.css";
 import { setTimeout } from "timers";
 
 export default class Item extends Component {
@@ -90,9 +89,7 @@ export default class Item extends Component {
           <Modal.Header>
             <Modal.Title>少侠住手，你已经点过了？</Modal.Title>
           </Modal.Header>
-
-          <Modal.Body>没看已经点过{this.state.type}了吗？</Modal.Body>
-
+          <Modal.Body>已经点过{this.state.type}了!!</Modal.Body>
           <Modal.Footer>
             <Button
               onClick={this.close}
